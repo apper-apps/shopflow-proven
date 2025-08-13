@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { categoryService } from "@/services/api/categoryService";
@@ -191,7 +191,7 @@ function App() {
     return <div className="loading flex items-center justify-center p-6 h-full w-full"><svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg></div>;
   }
 return (
-    <BrowserRouter>
+    <div className="min-h-screen bg-background">
       <AuthContext.Provider value={authMethods}>
         <div className="min-h-screen bg-background">
 <Routes>
@@ -350,7 +350,7 @@ return (
           />
         </div>
       </AuthContext.Provider>
-    </BrowserRouter>
+</div>
   );
 }
 
