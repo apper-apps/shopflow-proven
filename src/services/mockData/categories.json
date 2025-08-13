@@ -1,50 +1,58 @@
 [
   {
     "Id": 1,
-    "name": "Electronics",
-    "productCount": 156,
-    "subcategories": ["Smartphones", "Laptops", "Tablets", "Wearables", "Audio"]
+    "Name": "Electronics",
+    "product_count_c": 156,
+    "subcategories_c": "Smartphones,Laptops,Tablets,Wearables,Audio",
+    "Tags": "electronics,tech,gadgets"
   },
   {
     "Id": 2,
-    "name": "Clothing",
-    "productCount": 423,
-    "subcategories": ["Men's", "Women's", "Kids", "Shoes", "Accessories"]
+    "Name": "Clothing",
+    "product_count_c": 423,
+    "subcategories_c": "Men's,Women's,Kids,Shoes,Accessories",
+    "Tags": "fashion,apparel,clothing"
   },
   {
     "Id": 3,
-    "name": "Home & Garden",
-    "productCount": 234,
-    "subcategories": ["Kitchen", "Furniture", "Decor", "Garden", "Storage"]
+    "Name": "Home & Garden",
+    "product_count_c": 234,
+    "subcategories_c": "Kitchen,Furniture,Decor,Garden,Storage",
+    "Tags": "home,garden,decor"
   },
   {
     "Id": 4,
-    "name": "Sports",
-    "productCount": 189,
-    "subcategories": ["Fitness", "Outdoor", "Team Sports", "Water Sports", "Winter Sports"]
+    "Name": "Sports",
+    "product_count_c": 189,
+    "subcategories_c": "Fitness,Outdoor,Team Sports,Water Sports,Winter Sports",
+    "Tags": "sports,fitness,outdoor"
   },
   {
     "Id": 5,
-    "name": "Books",
-    "productCount": 892,
-    "subcategories": ["Fiction", "Non-Fiction", "Textbooks", "Children's", "Comics"]
+    "Name": "Books",
+    "product_count_c": 892,
+    "subcategories_c": "Fiction,Non-Fiction,Textbooks,Children's,Comics",
+    "Tags": "books,reading,literature"
   },
   {
     "Id": 6,
-    "name": "Beauty",
-    "productCount": 167,
-    "subcategories": ["Skincare", "Makeup", "Fragrance", "Hair Care", "Tools"]
+    "Name": "Beauty",
+    "product_count_c": 167,
+    "subcategories_c": "Skincare,Makeup,Fragrance,Hair Care,Tools",
+    "Tags": "beauty,cosmetics,skincare"
   },
   {
     "Id": 7,
-    "name": "Toys",
-    "productCount": 301,
-    "subcategories": ["Action Figures", "Board Games", "Building Sets", "Dolls", "Educational"]
+    "Name": "Toys",
+    "product_count_c": 301,
+    "subcategories_c": "Action Figures,Board Games,Building Sets,Dolls,Educational",
+    "Tags": "toys,games,children"
   },
   {
     "Id": 8,
-    "name": "Automotive",
-    "productCount": 145,
-    "subcategories": ["Parts", "Accessories", "Tools", "Care", "Electronics"]
+    "Name": "Automotive",
+    "product_count_c": 145,
+    "subcategories_c": "Parts,Accessories,Tools,Care,Electronics",
+    "Tags": "automotive,cars,parts"
   }
 ]

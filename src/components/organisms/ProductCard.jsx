@@ -37,19 +37,19 @@ const ProductCard = ({ product, onAddToCart }) => {
       <div className="relative aspect-square overflow-hidden">
         <img
           src={product.images?.[0] || "/api/placeholder/300/300"}
-          alt={product.title}
+          alt={product.title_c || product.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         
         {/* Stock Badge */}
-        {!product.inStock && (
+        {!product.in_stock_c && !product.inStock && (
           <div className="absolute top-3 left-3">
             <Badge variant="error">Out of Stock</Badge>
           </div>
         )}
         
         {/* Quick Add Button */}
-        {product.inStock && (
+        {(product.in_stock_c || product.inStock) && (
           <motion.div
             className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             initial={{ scale: 0 }}
@@ -71,23 +71,28 @@ const ProductCard = ({ product, onAddToCart }) => {
       <div className="p-4 space-y-3">
         <div>
           <h3 className="font-semibold text-gray-900 line-clamp-2 font-display group-hover:text-primary transition-colors duration-300">
-            {product.title}
+            {product.title_c || product.title}
           </h3>
-          <p className="text-sm text-gray-600 mt-1 font-body">{product.category}</p>
+          <p className="text-sm text-gray-600 mt-1 font-body">
+            {product.category_c?.Name || product.category}
+          </p>
         </div>
 
         {/* Rating */}
-        <RatingStars rating={product.rating} reviewCount={product.reviewCount} />
+        <RatingStars 
+          rating={product.rating_c || product.rating} 
+          reviewCount={product.review_count_c || product.reviewCount} 
+        />
 
         {/* Price and Action */}
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <p className="text-2xl font-bold gradient-primary bg-clip-text text-transparent font-display">
-              {formatPrice(product.price)}
+              {formatPrice(product.price_c || product.price)}
             </p>
           </div>
           
-          {product.inStock && (
+          {(product.in_stock_c || product.inStock) && (
             <Button
               size="sm"
               className="gradient-secondary text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"

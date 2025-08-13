@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../App";
 import ApperIcon from "@/components/ApperIcon";
 import SearchBar from "@/components/molecules/SearchBar";
 import CartBadge from "@/components/molecules/CartBadge";
 import CategoryDropdown from "@/components/molecules/CategoryDropdown";
 import Button from "@/components/atoms/Button";
-
 const Header = ({ cartItemCount = 0, onSearch, categories = [] }) => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
 
   const handleSearch = (query) => {
     if (query.trim()) {
@@ -17,11 +19,15 @@ const Header = ({ cartItemCount = 0, onSearch, categories = [] }) => {
   };
 
   const handleCategorySelect = (category) => {
-    navigate(`/category/${category.id}`);
+    navigate(`/category/${category.Id}`);
   };
 
   const handleCartClick = () => {
     navigate("/cart");
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -70,9 +76,18 @@ const Header = ({ cartItemCount = 0, onSearch, categories = [] }) => {
             <SearchBar onSearch={handleSearch} />
           </div>
 
-          {/* Cart */}
+          {/* Cart and User Actions */}
           <div className="flex items-center space-x-4">
             <CartBadge itemCount={cartItemCount} onClick={handleCartClick} />
+            
+            <Button
+              variant="ghost"
+              onClick={handleLogout}
+              className="flex items-center space-x-2"
+            >
+              <ApperIcon name="LogOut" size={20} />
+              <span className="hidden sm:inline">Logout</span>
+            </Button>
             
             {/* Mobile Menu Button */}
             <div className="md:hidden">

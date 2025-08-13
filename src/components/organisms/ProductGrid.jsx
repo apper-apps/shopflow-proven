@@ -85,7 +85,7 @@ const ProductGrid = ({ category, searchQuery, onAddToCart }) => {
         layout
       >
         <AnimatePresence>
-          {products.map((product, index) => (
+{products.map((product, index) => (
             <motion.div
               key={product.Id}
               initial={{ opacity: 0, y: 20 }}

@@ -54,7 +54,7 @@ const Category = ({ onAddToCart }) => {
         className="mb-8"
       >
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">
-          {category?.name || "Category"}
+{category?.Name || category?.name || "Category"}
         </h1>
         <p className="text-lg text-gray-600 font-body">
           Discover amazing products in this category
@@ -62,7 +62,7 @@ const Category = ({ onAddToCart }) => {
       </motion.div>
 
       <ProductGrid
-        category={category?.name}
+        category={category?.Name || category?.name}
         onAddToCart={onAddToCart}
       />
     </div>

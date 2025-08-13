@@ -91,7 +91,7 @@ const ProductDetail = ({ onAddToCart }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
-      <motion.nav
+<motion.nav
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex items-center space-x-2 text-sm text-gray-600 mb-8 font-body"
@@ -101,13 +101,13 @@ const ProductDetail = ({ onAddToCart }) => {
         </button>
         <ApperIcon name="ChevronRight" size={16} />
         <button 
-          onClick={() => navigate(`/category/${product.category.toLowerCase()}`)}
+          onClick={() => navigate(`/category/${(product.category_c?.Name || product.category).toLowerCase()}`)}
           className="hover:text-primary transition-colors"
         >
-          {product.category}
+          {product.category_c?.Name || product.category}
         </button>
         <ApperIcon name="ChevronRight" size={16} />
-        <span className="text-gray-900 truncate">{product.title}</span>
+        <span className="text-gray-900 truncate">{product.title_c || product.title}</span>
       </motion.nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -120,7 +120,7 @@ const ProductDetail = ({ onAddToCart }) => {
           <div className="aspect-square bg-white rounded-2xl card-shadow overflow-hidden">
             <img
               src={product.images?.[selectedImage] || "/api/placeholder/600/600"}
-              alt={product.title}
+              alt={product.title_c || product.title}
               className="w-full h-full object-cover"
             />
           </div>
@@ -141,7 +141,7 @@ const ProductDetail = ({ onAddToCart }) => {
                 >
                   <img
                     src={image}
-                    alt={`${product.title} ${index + 1}`}
+                    alt={`${product.title_c || product.title} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </motion.button>
@@ -158,20 +158,24 @@ const ProductDetail = ({ onAddToCart }) => {
         >
           <div>
             <Badge variant="outline" className="mb-3">
-              {product.category}
+              {product.category_c?.Name || product.category}
             </Badge>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">
-              {product.title}
+              {product.title_c || product.title}
             </h1>
-            <RatingStars rating={product.rating} reviewCount={product.reviewCount} size={20} />
+            <RatingStars 
+              rating={product.rating_c || product.rating} 
+              reviewCount={product.review_count_c || product.reviewCount} 
+              size={20} 
+            />
           </div>
 
           <div className="space-y-4">
             <div className="text-4xl font-bold gradient-primary bg-clip-text text-transparent font-display">
-              {formatPrice(product.price)}
+              {formatPrice(product.price_c || product.price)}
             </div>
             
-            {!product.inStock && (
+            {!(product.in_stock_c || product.inStock) && (
               <Badge variant="error" className="text-base px-4 py-2">
                 Out of Stock
               </Badge>
@@ -183,12 +187,12 @@ const ProductDetail = ({ onAddToCart }) => {
               Description
             </h3>
             <p className="text-gray-700 leading-relaxed font-body">
-              {product.description}
+              {product.description_c || product.description}
             </p>
           </div>
 
           {/* Quantity and Actions */}
-          {product.inStock && (
+          {(product.in_stock_c || product.inStock) && (
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
                 <span className="text-lg font-medium text-gray-900 font-display">Quantity:</span>
@@ -262,15 +266,15 @@ const ProductDetail = ({ onAddToCart }) => {
               >
                 <img
                   src={relatedProduct.images?.[0] || "/api/placeholder/300/300"}
-                  alt={relatedProduct.title}
+                  alt={relatedProduct.title_c || relatedProduct.title}
                   className="w-full aspect-square object-cover"
                 />
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 truncate font-display">
-                    {relatedProduct.title}
+                    {relatedProduct.title_c || relatedProduct.title}
                   </h3>
                   <p className="text-lg font-bold gradient-primary bg-clip-text text-transparent mt-2 font-display">
-                    {formatPrice(relatedProduct.price)}
+                    {formatPrice(relatedProduct.price_c || relatedProduct.price)}
                   </p>
                 </div>
               </motion.div>

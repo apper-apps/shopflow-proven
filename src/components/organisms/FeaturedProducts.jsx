@@ -16,13 +16,7 @@ const FeaturedProducts = ({ onAddToCart }) => {
       setLoading(true);
       setError("");
       
-      const allProducts = await productService.getAll();
-      // Get featured products (highest rated)
-      const featured = allProducts
-        .filter(product => product.rating >= 4.0)
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 8);
-      
+const featured = await productService.getFeaturedProducts();
       setProducts(featured);
     } catch (err) {
       setError(err.message || "Failed to load featured products");
@@ -37,7 +31,7 @@ const FeaturedProducts = ({ onAddToCart }) => {
 
   const handleAddToCart = (product) => {
     onAddToCart(product);
-    toast.success(`${product.title} added to cart!`);
+    toast.success(`${product.title_c || product.title} added to cart!`);
   };
 
   if (loading) {
