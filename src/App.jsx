@@ -1,24 +1,23 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { clearUser, setUser } from "./store/userSlice";
-import Login from "@/components/pages/Login";
-import Signup from "@/components/pages/Signup";
-import Callback from "@/components/pages/Callback";
-import ErrorPage from "@/components/pages/ErrorPage";
-import ResetPassword from "@/components/pages/ResetPassword";
-import PromptPassword from "@/components/pages/PromptPassword";
 import { categoryService } from "@/services/api/categoryService";
 import CartSidebar from "@/components/organisms/CartSidebar";
 import Header from "@/components/organisms/Header";
 import Home from "@/components/pages/Home";
 import Cart from "@/components/pages/Cart";
+import Callback from "@/components/pages/Callback";
+import Signup from "@/components/pages/Signup";
 import Checkout from "@/components/pages/Checkout";
 import ProductDetail from "@/components/pages/ProductDetail";
+import Login from "@/components/pages/Login";
+import PromptPassword from "@/components/pages/PromptPassword";
+import ErrorPage from "@/components/pages/ErrorPage";
 import Search from "@/components/pages/Search";
 import Category from "@/components/pages/Category";
-import { BrowserRouter } from "react-router-dom";
+import ResetPassword from "@/components/pages/ResetPassword";
+import { clearUser, setUser } from "@/store/userSlice";
 // Create auth context
 export const AuthContext = createContext(null);
 
@@ -195,62 +194,146 @@ return (
     <BrowserRouter>
       <AuthContext.Provider value={authMethods}>
         <div className="min-h-screen bg-background">
-          <Routes>
+<Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/callback" element={<Callback />} />
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
             <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
-            <Route path="/*" element={
-              isAuthenticated ? (
-                <>
-                  <Header
-                    cartItemCount={getTotalItems()}
-                    onSearch={handleSearch}
-                    categories={categories}
-                  />
-                  
-                  <main className="min-h-screen">
-                    <Routes>
-                      <Route path="/" element={<Home onAddToCart={addToCart} />} />
-                      <Route path="/product/:id" element={<ProductDetail onAddToCart={addToCart} />} />
-                      <Route path="/category/:categoryId" element={<Category onAddToCart={addToCart} />} />
-                      <Route path="/search" element={<Search onAddToCart={addToCart} />} />
-                      <Route 
-                        path="/cart" 
-                        element={
-                          <Cart 
-                            cartItems={cartItems}
-                            onUpdateQuantity={updateCartQuantity}
-                            onRemoveItem={removeFromCart}
-                          />
-                        } 
+            
+            {isAuthenticated ? (
+              <>
+                <Route path="/" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <Home onAddToCart={addToCart} />
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+                
+                <Route path="/product/:id" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <ProductDetail onAddToCart={addToCart} />
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+                
+                <Route path="/category/:categoryId" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <Category onAddToCart={addToCart} />
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+                
+                <Route path="/search" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <Search onAddToCart={addToCart} />
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+                
+                <Route path="/cart" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <Cart 
+                        cartItems={cartItems}
+                        onUpdateQuantity={updateCartQuantity}
+                        onRemoveItem={removeFromCart}
                       />
-                      <Route 
-                        path="/checkout" 
-                        element={
-                          <Checkout 
-                            cartItems={cartItems}
-                            onOrderComplete={clearCart}
-                          />
-                        } 
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+                
+                <Route path="/checkout" element={
+                  <>
+                    <Header
+                      cartItemCount={getTotalItems()}
+                      onSearch={handleSearch}
+                      categories={categories}
+                    />
+                    <main className="min-h-screen">
+                      <Checkout 
+                        cartItems={cartItems}
+                        onOrderComplete={clearCart}
                       />
-                    </Routes>
-                  </main>
-
-                  <CartSidebar
-                    isOpen={cartSidebarOpen}
-                    onClose={() => setCartSidebarOpen(false)}
-                    cartItems={cartItems}
-                    onUpdateQuantity={updateCartQuantity}
-                    onRemoveItem={removeFromCart}
-                  />
-                </>
-              ) : (
-                <Login />
-              )
-            } />
+                    </main>
+                    <CartSidebar
+                      isOpen={cartSidebarOpen}
+                      onClose={() => setCartSidebarOpen(false)}
+                      cartItems={cartItems}
+                      onUpdateQuantity={updateCartQuantity}
+                      onRemoveItem={removeFromCart}
+                    />
+                  </>
+                } />
+              </>
+            ) : (
+              <Route path="*" element={<Login />} />
+            )}
           </Routes>
 
           <ToastContainer
