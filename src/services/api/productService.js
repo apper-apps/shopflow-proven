@@ -446,14 +446,13 @@ export const productService = {
         return successfulDeletions.length > 0;
       }
       
-    } catch (error) {
+} catch (error) {
       if (error?.response?.data?.message) {
         console.error("Error deleting product:", error?.response?.data?.message);
       } else {
         console.error("Error deleting product:", error.message);
       }
       throw error;
-throw error;
     }
   }
 };
