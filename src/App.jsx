@@ -11,6 +11,7 @@ import Callback from "@/components/pages/Callback";
 import Signup from "@/components/pages/Signup";
 import Checkout from "@/components/pages/Checkout";
 import ProductDetail from "@/components/pages/ProductDetail";
+import CreateProductModal from "@/components/molecules/CreateProductModal";
 import Login from "@/components/pages/Login";
 import PromptPassword from "@/components/pages/PromptPassword";
 import ErrorPage from "@/components/pages/ErrorPage";
@@ -202,8 +203,21 @@ return (
             <Route path="/prompt-password/:appId/:emailAddress/:provider" element={<PromptPassword />} />
             <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
             
-            {isAuthenticated ? (
+{isAuthenticated ? (
               <>
+                <Route path="/products/create" element={<>
+                    <Header cartItemCount={getTotalItems()} onSearch={handleSearch} categories={categories} />
+                    <main className="min-h-screen bg-background py-8">
+                      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <CreateProductModal 
+                          isOpen={true} 
+                          onClose={() => navigate('/')} 
+                          onSuccess={() => navigate('/')} 
+                        />
+                      </div>
+                    </main>
+                    <CartSidebar isOpen={cartSidebarOpen} onClose={() => setCartSidebarOpen(false)} cartItems={cartItems} onUpdateQuantity={updateCartQuantity} onRemoveItem={removeFromCart} />
+                  </>} />
                 <Route path="/" element={
                   <>
                     <Header
